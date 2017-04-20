@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>My blog</title>
+    <link>https://janczer.github.io/</link>
+    <description>Recent content on My blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Apr 2017 21:18:39 +0200</lastBuildDate>
+    
+	<atom:link href="https://janczer.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About me</title>
+      <link>https://janczer.github.io/about/</link>
+      <pubDate>Thu, 20 Apr 2017 21:18:39 +0200</pubDate>
+      
+      <guid>https://janczer.github.io/about/</guid>
+      <description>Hello and welcome to my blog</description>
+    </item>
+    
+  </channel>
+</rss>

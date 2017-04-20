@@ -1,0 +1,6 @@
+baseURL = "http://janczer.github.io/"
+languageCode = "en-us"
+title = "My Blog"
+publishDir = "docs"
+newContentEditor = "vim"
+theme = "nofancy"

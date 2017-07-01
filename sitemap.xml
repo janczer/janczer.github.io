@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://janczer.github.io/post/first-scala/</loc>
+    <loc>https://janczer.github.io/first-scala/</loc>
     <lastmod>2017-07-01T20:42:56+02:00</lastmod>
   </url>
   
@@ -24,12 +24,6 @@
   
   <url>
     <loc>https://janczer.github.io/</loc>
-    <lastmod>2017-07-01T20:42:56+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://janczer.github.io/post/</loc>
     <lastmod>2017-07-01T20:42:56+02:00</lastmod>
     <priority>0</priority>
   </url>

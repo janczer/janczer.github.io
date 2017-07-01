@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+
+<meta name="description" content="Today I wrote first program on Scala.
+It&rsquo;s very simple filter which makes mirror image horizontally or/and vertically.
+for (x &lt;- 0 until w) for (y &lt;- 0 until h) { val wOut = if (ox) w - x - 1 else x val hOut = if (oy) h - y - 1 else y out.setRGB(x, y, img.getRGB(wOut, hOut) &amp; 0xffffff) }  When I wrote with program I use article about image processing in Scala.">
+
+<meta property="og:title" content="First Scala" />
+<meta property="og:description" content="Today I wrote first program on Scala.
+It&rsquo;s very simple filter which makes mirror image horizontally or/and vertically.
+for (x &lt;- 0 until w) for (y &lt;- 0 until h) { val wOut = if (ox) w - x - 1 else x val hOut = if (oy) h - y - 1 else y out.setRGB(x, y, img.getRGB(wOut, hOut) &amp; 0xffffff) }  When I wrote with program I use article about image processing in Scala." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://janczer.github.io/blog/first-scala/" />
+
+
+
+<meta property="article:published_time" content="2017-07-01T20:42:56&#43;02:00"/>
+<meta property="article:modified_time" content="2017-07-01T20:42:56&#43;02:00"/>
+
+
+
+
+
+
+
+
+
+
+
+
+<title>
+
+
+     First Scala 
+
+</title>
+<link rel="canonical" href="https://janczer.github.io/blog/first-scala/">
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+
+
+
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/pygments.css">
+    <link rel="stylesheet" href="/css/main.css">
+    
+
+
+
+
+<link rel="shortcut icon"
+
+    href="/img/favicon.ico"
+
+>
+
+
+
+
+</head>
+
+
+<body lang="">
+
+<section class="header">
+    <div class="container">
+        <div class="content">
+            
+            <a href="/"><div class="name"></div></a>
+            
+            <nav>
+                <ul>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<section class="icons">
+    <div class="container">
+        <div class="content">
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        
+            <a href="https://janczer.github.io/index.xml"><img class="icon" src="/img/rss.svg" alt="rss" /></a>
+        
+        
+        </div>
+    </div>
+</section>
+
+
+<section class="main post non-narrow zero-top-spacing">
+    <div class="container">
+        <div class="content">
+            <div class="front-matter">
+                <div class="title-container">
+                    <div class="page-heading">
+
+    First Scala
+
+</div>
+
+                    <div class="initials"><a href="https://janczer.github.io/"></a></div>
+                </div>
+                <div class="meta">
+                    
+                    <div class="date" title='Sat Jul 1 2017 20:42:56 CEST'>Jul 1, 2017</div>
+                    
+                    
+		    <div class="reading-time"><div class="middot"></div>One minute read</div>
+                    
+                </div>
+            </div>
+            <div class="markdown">
+                <p>Today I wrote first program on <a href="https://www.scala-lang.org">Scala</a>.</p>
+
+<p>It&rsquo;s very simple <a href="https://github.com/janczer/filters">filter</a> which makes mirror image horizontally or/and vertically.</p>
+
+<pre><code class="language-Scala">for (x &lt;- 0 until w)
+    for (y &lt;- 0 until h) {
+        val wOut = if (ox) w - x - 1 else x
+        val hOut = if (oy) h - y - 1 else y
+        out.setRGB(x, y, img.getRGB(wOut, hOut) &amp; 0xffffff)
+    }
+</code></pre>
+
+<p>When I wrote with program I use article about <a href="https://otfried.org/scala/image.html">image processing in Scala</a>.</p>
+
+<p>Scala program compile to JVM bytecodes. Scala code use Java libraries. And in with program I use <code>java.io.File</code> for opening files, <code>javax.imageio.ImageIO</code> for saving image to file and <code>java.awt.image.BufferedImage</code> for processing image.</p>
+
+<p>I really liked it.</p>
+
+                <br>
+		<p><a href="/blog/">Back to posts</a></p>
+            </div>
+            <br>
+            <div class="disqus">
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+</body>
+</html>
+

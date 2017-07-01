@@ -4,8 +4,8 @@
 
   
   <meta charset="utf-8">
-  <title>Categories</title>
-  <meta name="description" content="Categories">
+  <title>First Scala</title>
+  <meta name="description" content="First Scala">
   <meta name="author" content="">
 
   
@@ -62,28 +62,55 @@
     </div>
     <div class="pure-u-1-24 pure-u-md-1-6"></div>
 </div>
+
 <div class="pure-g">
-<div class="pure-u-1-24 pure-u-md-5-24"></div>
-<div class="pure-u-11-12 pure-u-md-5-8">
-	<p class="posts-name">Categories:</p>
-	<div class="post-content">
-		<ul class="posts">
-		
-		
-			<li>
-				<a href="misc">misc</a>
-				<span>&#40;1&#41;</span>
-			</li>
-		
-			<li>
-				<a href="scala">scala</a>
-				<span>&#40;1&#41;</span>
-			</li>
-		
-		</ul>
+    <div class="pure-u-1-24 pure-u-md-5-24"></div>
+	<div class="pure-u-11-12 pure-u-md-5-8">
+        <div class="post">
+
+            <div class="post-title">
+                <p class="footnote">
+                    <time class="">2017-07-01</time>
+		            
+                    
+                    |
+                    
+                    
+
+                    
+                    categories:<a href="http://janczer.github.io/categories/scala">scala</a> 
+                    
+
+                    
+                </p>
+                <h1>First Scala</h1>
+            </div>
+
+            <div class="post-content">
+                <p>Today I wrote first program on <a href="https://www.scala-lang.org">Scala</a>.</p>
+
+<p>It&rsquo;s very simple <a href="https://github.com/janczer/filters">filter</a> which makes mirror image horizontally or/and vertically.</p>
+
+<pre><code class="language-Scala">for (x &lt;- 0 until w)
+    for (y &lt;- 0 until h) {
+        val wOut = if (ox) w - x - 1 else x
+        val hOut = if (oy) h - y - 1 else y
+        out.setRGB(x, y, img.getRGB(wOut, hOut) &amp; 0xffffff)
+    }
+</code></pre>
+
+<p>When I wrote with program I use article about <a href="https://otfried.org/scala/image.html">image processing in Scala</a>.</p>
+
+<p>Scala program compile to JVM bytecodes. Scala code use Java libraries. And in with program I use <code>java.io.File</code> for opening files, <code>javax.imageio.ImageIO</code> for saving image to file and <code>java.awt.image.BufferedImage</code> for processing image.</p>
+
+<p>I really liked it.</p>
+
+            </div>
+        </div>
 	</div>
+    <div class="pure-u-1-24 pure-u-md-1-6"></div>
 </div>
-<div class="pure-u-1-24 pure-u-md-1-6"></div>
+
 <div class="footer pure-g">
     <div class="pure-u-1-24 pure-u-md-5-24"></div>
     <div class="pure-u-11-12 pure-u-md-5-8">

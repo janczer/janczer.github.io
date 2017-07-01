@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://janczer.github.io/first_scala/</loc>
+    <lastmod>2017-07-01T18:05:08+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://janczer.github.io/about/</loc>
+    <lastmod>2017-04-20T21:18:39+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://janczer.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://janczer.github.io/categories/misc/</loc>
+    <lastmod>2017-04-20T21:18:39+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://janczer.github.io/</loc>
+    <lastmod>2017-07-01T18:05:08+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://janczer.github.io/categories/scala/</loc>
+    <lastmod>2017-07-01T18:05:08+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://janczer.github.io/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

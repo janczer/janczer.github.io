@@ -12,11 +12,11 @@
     
     
     <item>
-      <title>How use scala project (jar) in console scripts</title>
-      <link>https://janczer.github.io/blog/how-use-scala-project-jar-in-console-scripts/</link>
+      <title>Use scala jar</title>
+      <link>https://janczer.github.io/blog/use-scala-jar/</link>
       <pubDate>Sat, 08 Jul 2017 17:24:27 +0200</pubDate>
       
-      <guid>https://janczer.github.io/blog/how-use-scala-project-jar-in-console-scripts/</guid>
+      <guid>https://janczer.github.io/blog/use-scala-jar/</guid>
       <description>One week ago I wrote my first program on Scala. It&amp;rsquo;s was an image processing filter.
 After this week I implemented seven filters:
 1) Mirror image 2) Gray filter 3) Sepia filter 4) Inverse filter 5) Split image to RGB channels 6) Color accent filter 7) Histogram

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-	<meta name="generator" content="Hugo 0.26-DEV" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="HandheldFriendly" content="True">
@@ -20,10 +19,10 @@
     <title>
       
       
-         Blog =&gt; {content} 
+         Use scala jar 
       
     </title>
-    <link rel="canonical" href="https://janczer.github.io/">
+    <link rel="canonical" href="https://janczer.github.io/blog/use-scala-jar/">
 
     <style>
   * {
@@ -379,8 +378,6 @@
 
 
     
-      <link href="https://janczer.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Blog =&gt; {content}" />
-    
   </head>
 
   <body>
@@ -397,34 +394,78 @@
 
 
 <section id=content>
-  <ul class=posts_listing>
+  <h1> Use scala jar </h1>
+
+  <div id=sub-header>
+    July 2017 · 2 minute read
+  </div>
+
+  <div class="entry-content">
+    <p>One week ago I wrote my <a href="blog/first-scala/">first program</a> on Scala. It&rsquo;s was an image processing filter.</p>
+
+<p>After this week I implemented seven filters:</p>
+
+<ol>
+<li>Mirror image</li>
+<li>Gray filter</li>
+<li>Sepia filter</li>
+<li>Inverse filter</li>
+<li>Split image to RGB channels</li>
+<li>Color accent filter</li>
+<li>Histogram</li>
+</ol>
+
+<p>I was writing it like a one scala script per file. But <a href="https://github.com/janczer/filters/commit/fb71e24fd4936e3e2acc5a35ed0874fa55c4b239">today</a> I changed repository to SBT project. And I learned how compile and how use jar file.</p>
+
+<p>If you want to use my <a href="https://github.com/janczer/filters">library</a> of image processing you should:</p>
+
+<pre><code>$ git clone https://github.com/janczer/filters
+$ cd filters
+$ sbt run
+$ sbt package
+</code></pre>
+
+<p>And in directory <code>target/scala-2.12/</code> you will have file with name like <code>filters_X.XX-X.X.jar</code>. If you want to use it in your scala project you just need add jar file to <code>lib</code> directory. But if you want to use it in scala script (this is the way I&rsquo;m testing my library) you should add path to jar.</p>
+
+<p>For testing my filters I use this script:</p>
+
+<pre><code class="language-Scala">import janczer.filters.Filters
+import java.io.File
+import javax.imageio.ImageIO
+
+def test() {
+  val photoIn = ImageIO.read(new File(&quot;test.jpg&quot;))
+
+
+  ImageIO.write(Filters.mirror(photoIn, true, true), &quot;jpg&quot;, new File(&quot;mirror.jpg&quot;))
+  ImageIO.write(Filters.gray(photoIn, &quot;lightness&quot;), &quot;jpg&quot;, new File(&quot;gray.jpg&quot;))
+  ImageIO.write(Filters.sepia(photoIn, 35), &quot;jpg&quot;, new File(&quot;sepia.jpg&quot;))
+  ImageIO.write(Filters.inverse(photoIn), &quot;jpg&quot;, new File(&quot;inverse.jpg&quot;))
+  ImageIO.write(Filters.rgb_channels(photoIn, true, false, false), &quot;jpg&quot;, new File(&quot;rgb_channels.jpg&quot;))
+  ImageIO.write(Filters.color_accent(photoIn, 0, 50), &quot;jpg&quot;, new File(&quot;color_accent.jpg&quot;))
+  ImageIO.write(Filters.histogram(photoIn), &quot;jpg&quot;, new File(&quot;histogram.jpg&quot;))
+
+}
+</code></pre>
+
+<p>This is the way how I run it:</p>
+
+<pre><code>$ scala -classpath &quot;filters_2.12-0.2.jar&quot; test.scala
+</code></pre>
+
+  </div>
+
+  <div id=links>
     
-      <li>
-        <h2><a href="https://janczer.github.io/blog/use-scala-jar/">Use scala jar</a></h2>
-        <div id=date>
-          <time>July 2017</time>
-        </div>
-      </li>
+      <a class="basic-alignment left" href="https://janczer.github.io/blog/first-scala/">&laquo; First Scala</a>
     
-      <li>
-        <h2><a href="https://janczer.github.io/blog/first-scala/">First Scala</a></h2>
-        <div id=date>
-          <time>July 2017</time>
-        </div>
-      </li>
     
-      <li>
-        <h2><a href="https://janczer.github.io/about/">About me</a></h2>
-        <div id=date>
-          <time>April 2017</time>
-        </div>
-      </li>
-    
-  </ul>
+  </div>
 </section>
 
   
 </body>
 </html>
+
 
 

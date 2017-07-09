@@ -1,154 +1,407 @@
 <!DOCTYPE html>
 <html lang="en-us">
-
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="chrome=1">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="referrer" content="no-referrer">
-
-<meta name="description" content="Today I wrote first program on Scala.
-It&rsquo;s very simple filter which makes mirror image horizontally or/and vertically.
-for (x &lt;- 0 until w) for (y &lt;- 0 until h) { val wOut = if (ox) w - x - 1 else x val hOut = if (oy) h - y - 1 else y out.setRGB(x, y, img.getRGB(wOut, hOut) &amp; 0xffffff) }  When I wrote with program I use article about image processing in Scala.">
-
-<meta property="og:title" content="First Scala" />
-<meta property="og:description" content="Today I wrote first program on Scala.
-It&rsquo;s very simple filter which makes mirror image horizontally or/and vertically.
-for (x &lt;- 0 until w) for (y &lt;- 0 until h) { val wOut = if (ox) w - x - 1 else x val hOut = if (oy) h - y - 1 else y out.setRGB(x, y, img.getRGB(wOut, hOut) &amp; 0xffffff) }  When I wrote with program I use article about image processing in Scala." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://janczer.github.io/blog/first-scala/" />
-
-
-
-<meta property="article:published_time" content="2017-07-01T20:42:56&#43;02:00"/>
-<meta property="article:modified_time" content="2017-07-01T20:42:56&#43;02:00"/>
-
-
-
-
-
-
-
-
-
-
-
-
-<title>
-
-
-     First Scala 
-
-</title>
-<link rel="canonical" href="https://janczer.github.io/blog/first-scala/">
-
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
-
-
-
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/pygments.css">
-    <link rel="stylesheet" href="/css/main.css">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <base href="https://janczer.github.io/">
     
 
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400' rel='stylesheet' type='text/css'>
+
+    <link rel="icon" type="image/png" href="/favicon_16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon_32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon_128x128.png" sizes="128x128">
+
+    <title>
+      
+      
+         First Scala 
+      
+    </title>
+    <link rel="canonical" href="https://janczer.github.io/blog/first-scala/">
+
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+  }
+
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:700px;
+    margin:auto;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  a img {
+    border:none;
+  }
+
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
+
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+
+  blockquote p {
+    display:inline-block;
+    font-style:italic;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    content:'\201C';
+    font-size:35px;
+    color:#403c3b;
+  }
+
+  blockquote:after {
+    content:'\201D';
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+  #sub-header, time {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .posts_listing a,#nav a {
+    text-decoration: none;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 5px;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+  }
+
+  #nav ul li:before, .posts_listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 80px;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content time {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts_listing {
+    margin:0 0 50px;
+  }
+
+  .posts_listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts_listing li a:hover,#nav a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts_listing li div {
+      font-size:12px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts_listing li div{
+      font-size:12px;
+    }
+  }
+</style>
 
 
+    
+  </head>
 
-<link rel="shortcut icon"
-
-    href="/img/favicon.ico"
-
->
-
-
-
-
-</head>
-
-
-<body lang="">
-
-<section class="header">
-    <div class="container">
-        <div class="content">
-            
-            <a href="/"><div class="name"></div></a>
-            
-            <nav>
-                <ul>
-                    
-                        <li class="nav-blog"><a href="https://janczer.github.io/blog/"><span>Blog</span></a></li>
-                    
-                        <li class="nav-about"><a href="https://janczer.github.io/about/"><span>About</span></a></li>
-                    
-                </ul>
-            </nav>
-        </div>
-    </div>
-</section>
-
-<section class="icons">
-    <div class="container">
-        <div class="content">
-
+  <body>
+    <section id=nav>
+      <h1><a href="/"></a></h1>
+      <ul>
         
-
+          <li><a href="/blog/">Blog</a></li>
         
-
+          <li><a href="/about/">About</a></li>
         
-
-        
-
-        
-
-        
-
-        
-
-        
-            <a href="https://janczer.github.io/index.xml"><img class="icon" src="/img/rss.svg" alt="rss" /></a>
-        
-        
-        </div>
-    </div>
-</section>
+      </ul>
+    </section>
 
 
-<section class="main post non-narrow zero-top-spacing">
-    <div class="container">
-        <div class="content">
-            <div class="front-matter">
-                <div class="title-container">
-                    <div class="page-heading">
+<section id=content>
+  <h1> First Scala </h1>
 
-    First Scala
+  <div id=sub-header>
+    July 2017 · 1 minute read
+  </div>
 
-</div>
-
-                    <div class="initials"><a href="https://janczer.github.io/"></a></div>
-                </div>
-                <div class="meta">
-                    
-                    <div class="date" title='Sat Jul 1 2017 20:42:56 CEST'>Jul 1, 2017</div>
-                    
-                    
-		    <div class="reading-time"><div class="middot"></div>One minute read</div>
-                    
-                </div>
-            </div>
-            <div class="markdown">
-                <p>Today I wrote first program on <a href="https://www.scala-lang.org">Scala</a>.</p>
+  <div class="entry-content">
+    <p>Today I wrote first program on <a href="https://www.scala-lang.org">Scala</a>.</p>
 
 <p>It&rsquo;s very simple <a href="https://github.com/janczer/filters">filter</a> which makes mirror image horizontally or/and vertically.</p>
 
@@ -166,24 +419,19 @@ for (x &lt;- 0 until w) for (y &lt;- 0 until h) { val wOut = if (ox) w - x - 1 e
 
 <p>I really liked it.</p>
 
-                <br>
-		<p><a href="/blog/">Back to posts</a></p>
-            </div>
-            <br>
-            <div class="disqus">
-                
-            </div>
-        </div>
-    </div>
+  </div>
+
+  <div id=links>
+    
+    
+      <a class="basic-alignment left" href="https://janczer.github.io/blog/use-scala-jar/">Use scala jar &raquo;</a>
+    
+  </div>
 </section>
 
-
-
-
-
-
-
-
+  
 </body>
 </html>
+
+
 

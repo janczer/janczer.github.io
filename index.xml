@@ -19,8 +19,7 @@
       <guid>https://janczer.github.io/blog/use-scala-jar/</guid>
       <description>One week ago I wrote my first program on Scala. It&amp;rsquo;s was an image processing filter.
 After this week I implemented seven filters:
-1) Mirror image 2) Gray filter 3) Sepia filter 4) Inverse filter 5) Split image to RGB channels 6) Color accent filter 7) Histogram
-I was writing it like a one scala script per file. But today I changed repository to SBT project. And I learned how compile and how use jar file.</description>
+ Mirror image Gray filter Sepia filter Inverse filter Split image to RGB channels Color accent filter Histogram  I was writing it like a one scala script per file. But today I changed repository to SBT project. And I learned how compile and how use jar file.</description>
     </item>
     
     <item>

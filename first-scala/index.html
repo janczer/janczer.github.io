@@ -1,93 +1,423 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <base href="https://janczer.github.io/">
+    
 
-  
-  <meta charset="utf-8">
-  <title>First Scala</title>
-  <meta name="description" content="First Scala">
-  <meta name="author" content="">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400' rel='stylesheet' type='text/css'>
 
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/favicon_16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon_32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon_128x128.png" sizes="128x128">
 
-  
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://janczer.github.io/css/fonts.css">
-  
-  
-  <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.1/build/pure-min.css" integrity="sha384-CCTZv2q9I9m3UOxRLaJneXrrqKwUNOzZ6NGEUMwHtShDJ+nCoiXJCAgi05KfkLGY" crossorigin="anonymous">
-  
-  
-    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.1/build/grids-responsive-min.css">
-  
-  <link rel="stylesheet" href="https://janczer.github.io/css/custom.css">
+    <title>
+      
+      
+         First Scala 
+      
+    </title>
+    <link rel="canonical" href="https://janczer.github.io/first-scala/">
 
-  
-  
-  <link rel="stylesheet" href="https://janczer.github.io/highlight/styles/default.css">
-  
-  <script src="https://janczer.github.io/highlight/highlight.pack.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+  }
 
-  <meta name="generator" content="Hugo 0.20.2" />
-  
-</head>
-<body>
+  a .icon {
+    width: 16px;
+    height: 16px; 
+  }
 
-<div class="header pure-g">
-    <div class="pure-u-1-24 pure-u-md-5-24"></div>
-    <div class="pure-u-11-12 pure-u-md-5-8">
-        <div class="desktop pure-menu pure-menu-horizontal nav-menu">
-            
-            <a href="https://janczer.github.io/" class="site-title pure-menu-heading">My blog</a>
-            <ul class="pure-menu-list">
-				
-                <li class="pure-menu-item">
-                    <a href="https://janczer.github.io/about/" class="pure-menu-link">About</a>
-                </li>
-            </ul>
-        </div>
-        <div class="mobile pure-menu nav-menu">
-            <a href="/" class="pure-menu-heading" id="toggle-home">My blog</a>
-            <a href="#" id="toggle-btn">&#9776;</a>
-            <ul class="pure-menu-list" id="toggle-content" style="display:none;">
-                
-				
-                <li class="pure-menu-item">
-                    <a href="https://janczer.github.io/about" class="pure-menu-link">About</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="pure-u-1-24 pure-u-md-1-6"></div>
-</div>
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:700px;
+    margin:auto;
+  }
 
-<div class="pure-g">
-    <div class="pure-u-1-24 pure-u-md-5-24"></div>
-	<div class="pure-u-11-12 pure-u-md-5-8">
-        <div class="post">
+  p {
+    margin: 20px 0;
+  }
 
-            <div class="post-title">
-                <p class="footnote">
-                    <time class="">2017-07-01</time>
-		            
-                    
-                    |
-                    
-                    
+  a img {
+    border:none;
+  }
 
-                    
-                    categories:<a href="https://janczer.github.io/categories/scala">scala</a> 
-                    
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
 
-                    
-                </p>
-                <h1>First Scala</h1>
-            </div>
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
 
-            <div class="post-content">
-                <p>Today I wrote first program on <a href="https://www.scala-lang.org">Scala</a>.</p>
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+
+  blockquote p {
+    display:inline-block;
+    font-style:italic;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    content:'\201C';
+    font-size:35px;
+    color:#403c3b;
+  }
+
+  blockquote:after {
+    content:'\201D';
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+  #sub-header, time {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .posts_listing a,#nav a {
+    text-decoration: none;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 5px;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+  }
+
+  #nav ul li:before, .posts_listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 80px;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content time {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts_listing {
+    margin:0 0 50px;
+  }
+
+  .posts_listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts_listing li a:hover,#nav a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  .icons a:first-child {
+    margin-left: 25px;
+  }
+
+  .icons a {
+      display: inline-block;
+      margin-left: 6px;
+      margin-right: 6px;
+      opacity: 0.6;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts_listing li div {
+      font-size:12px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts_listing li div{
+      font-size:12px;
+    }
+  }
+</style>
+
+
+    
+  </head>
+
+  <body>
+    <section id=nav>
+      <h1><a href="/"></a></h1>
+      <ul>
+        
+          <li><a href="/">Blog</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </section>
+
+
+<section id=content>
+  <h1> First Scala </h1>
+
+  <div id=sub-header>
+    July 2017 · 1 minute read
+  </div>
+
+  <div class="entry-content">
+    <p>Today I wrote first program on <a href="https://www.scala-lang.org">Scala</a>.</p>
 
 <p>It&rsquo;s very simple <a href="https://github.com/janczer/filters">filter</a> which makes mirror image horizontally or/and vertically.</p>
 
@@ -99,67 +429,29 @@
     }
 </code></pre>
 
-<p>When I wrote with program I use article about <a href="https://otfried.org/scala/image.html">image processing in Scala</a>.</p>
+<p>When I wrote with program I use article about <a href="http://otfried.org/scala/image.html">image processing in Scala</a>.</p>
 
-<p>Scala program compile to JVM bytecodes. Scala code use Java libraries. And in with program I use <code>java.io.File</code> for opening files, <code>javax.imageio.ImageIO</code> for saving image to file and <code>java.awt.image.BufferedImage</code> for processing image.</p>
+<p>Scala program compile to JVM bytecodes. Scala code use Java libraries. And in program I use <code>java.io.File</code> for opening files, <code>javax.imageio.ImageIO</code> for saving image to file and <code>java.awt.image.BufferedImage</code> for processing image.</p>
 
 <p>I really liked it.</p>
 
-            </div>
-        </div>
-	</div>
-    <div class="pure-u-1-24 pure-u-md-1-6"></div>
-</div>
+  </div>
 
-<div class="footer pure-g">
-    <div class="pure-u-1-24 pure-u-md-5-24"></div>
-    <div class="pure-u-11-12 pure-u-md-5-8">
-        <div class="footer-content">
-		  <div class="pure-menu pure-menu-horizontal">
-              <ul>
-			      
-				  
-                  
-          
-                  
-          
-                  
-          
-                  
-          
-                  
-          
-              </ul>
-              <a href="#" class="pure-menu-heading pull-right" id="gototop-btn">↑↑</a>
-          </div>
-		  
-		</div>
-	  </div>
-      <div class="pure-u-1-24 pure-u-md-1-6"></div>
-</div>
+  <div id=links>
+    
+    
+  </div>
+</section>
 
-
-<script src="https://janczer.github.io/js/jquery.min.js" type="text/javascript"></script>
-<script src="https://janczer.github.io/js/jquery.timeago.js" type="text/javascript"></script>
-<script type="text/javascript">
-  $(function(){
-    $("time.timeago").timeago();
-  })
-  $("#toggle-btn").click(function(){
-    $("#toggle-content").toggle();
-    if($(this).html() === "☰") {
-        $(this).html("X")
-    } else {
-        $(this).html("☰")
-    }
-  });
-  $(window).resize(function(){
-    if(window.innerWidth > 768) {
-      $(".desktop").removeAttr("style");
-    }
-  });
-</script>
-
+    <div class="icons">
+        
+        
+            <a href="//github.com/janczer" target="_blank"><img class="icon" src="github.png" alt="github"/></a>
+        
+    </div>
+  
 </body>
 </html>
+
+
 

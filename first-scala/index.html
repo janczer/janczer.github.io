@@ -420,14 +420,13 @@
     <p>Today I wrote first program on <a href="https://www.scala-lang.org">Scala</a>.</p>
 
 <p>It&rsquo;s very simple <a href="https://github.com/janczer/filters">filter</a> which makes mirror image horizontally or/and vertically.</p>
-
-<pre><code class="language-Scala">for (x &lt;- 0 until w)
-    for (y &lt;- 0 until h) {
-        val wOut = if (ox) w - x - 1 else x
-        val hOut = if (oy) h - y - 1 else y
-        out.setRGB(x, y, img.getRGB(wOut, hOut) &amp; 0xffffff)
-    }
-</code></pre>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">for</span> <span style="color: #666666">(</span>x <span style="color: #007020; font-weight: bold">&lt;-</span> <span style="color: #40a070">0</span> until w<span style="color: #666666">)</span>
+    <span style="color: #007020; font-weight: bold">for</span> <span style="color: #666666">(</span>y <span style="color: #007020; font-weight: bold">&lt;-</span> <span style="color: #40a070">0</span> until h<span style="color: #666666">)</span> <span style="color: #666666">{</span>
+        <span style="color: #007020; font-weight: bold">val</span> wOut <span style="color: #007020; font-weight: bold">=</span> <span style="color: #007020; font-weight: bold">if</span> <span style="color: #666666">(</span>ox<span style="color: #666666">)</span> w <span style="color: #666666">-</span> x <span style="color: #666666">-</span> <span style="color: #40a070">1</span> <span style="color: #007020; font-weight: bold">else</span> x
+        <span style="color: #007020; font-weight: bold">val</span> hOut <span style="color: #007020; font-weight: bold">=</span> <span style="color: #007020; font-weight: bold">if</span> <span style="color: #666666">(</span>oy<span style="color: #666666">)</span> h <span style="color: #666666">-</span> y <span style="color: #666666">-</span> <span style="color: #40a070">1</span> <span style="color: #007020; font-weight: bold">else</span> y
+        out<span style="color: #666666">.</span>setRGB<span style="color: #666666">(</span>x<span style="color: #666666">,</span> y<span style="color: #666666">,</span> img<span style="color: #666666">.</span>getRGB<span style="color: #666666">(</span>wOut<span style="color: #666666">,</span> hOut<span style="color: #666666">)</span> <span style="color: #666666">&amp;</span> <span style="color: #40a070">0xffffff</span><span style="color: #666666">)</span>
+    <span style="color: #666666">}</span>
+</pre></div>
 
 <p>When I wrote with program I use article about <a href="http://otfried.org/scala/image.html">image processing in Scala</a>.</p>
 

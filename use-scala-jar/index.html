@@ -434,35 +434,33 @@
 <p>I was writing it like a one scala script per file. But <a href="https://github.com/janczer/filters/commit/fb71e24fd4936e3e2acc5a35ed0874fa55c4b239">today</a> I changed repository to SBT project. And I learned how compile and how use jar file.</p>
 
 <p>If you want to use my <a href="https://github.com/janczer/filters">library</a> of image processing you should:</p>
-
-<pre><code>$ git clone https://github.com/janczer/filters
-$ cd filters
-$ sbt run
-$ sbt package
-</code></pre>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #c65d09; font-weight: bold">$</span> git clone https://github.com/janczer/filters
+<span style="color: #c65d09; font-weight: bold">$</span> <span style="color: #007020">cd</span> filters
+<span style="color: #c65d09; font-weight: bold">$</span> sbt run
+<span style="color: #c65d09; font-weight: bold">$</span> sbt package
+</pre></div>
 
 <p>And in directory <code>target/scala-2.12/</code> you will have file with name like <code>filters_X.XX-X.X.jar</code>. If you want to use it in your scala project you just need add jar file to <code>lib</code> directory. But if you want to use it in scala script (this is the way I&rsquo;m testing my library) you should add path to jar.</p>
 
 <p>For testing my filters I use this script:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">janczer.filters.Filters</span>
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">java.io.File</span>
+<span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">javax.imageio.ImageIO</span>
 
-<pre><code class="language-Scala">import janczer.filters.Filters
-import java.io.File
-import javax.imageio.ImageIO
-
-def test() {
-  val photoIn = ImageIO.read(new File(&quot;test.jpg&quot;))
+<span style="color: #007020; font-weight: bold">def</span> test<span style="color: #666666">()</span> <span style="color: #666666">{</span>
+  <span style="color: #007020; font-weight: bold">val</span> photoIn <span style="color: #007020; font-weight: bold">=</span> <span style="color: #0e84b5; font-weight: bold">ImageIO</span><span style="color: #666666">.</span>read<span style="color: #666666">(</span><span style="color: #007020; font-weight: bold">new</span> <span style="color: #0e84b5; font-weight: bold">File</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;test.jpg&quot;</span><span style="color: #666666">))</span>
 
 
-  ImageIO.write(Filters.mirror(photoIn, true, true), &quot;jpg&quot;, new File(&quot;mirror.jpg&quot;))
-  ImageIO.write(Filters.gray(photoIn, &quot;lightness&quot;), &quot;jpg&quot;, new File(&quot;gray.jpg&quot;))
-  ImageIO.write(Filters.sepia(photoIn, 35), &quot;jpg&quot;, new File(&quot;sepia.jpg&quot;))
-  ImageIO.write(Filters.inverse(photoIn), &quot;jpg&quot;, new File(&quot;inverse.jpg&quot;))
-  ImageIO.write(Filters.rgb_channels(photoIn, true, false, false), &quot;jpg&quot;, new File(&quot;rgb_channels.jpg&quot;))
-  ImageIO.write(Filters.color_accent(photoIn, 0, 50), &quot;jpg&quot;, new File(&quot;color_accent.jpg&quot;))
-  ImageIO.write(Filters.histogram(photoIn), &quot;jpg&quot;, new File(&quot;histogram.jpg&quot;))
+  <span style="color: #0e84b5; font-weight: bold">ImageIO</span><span style="color: #666666">.</span>write<span style="color: #666666">(</span><span style="color: #0e84b5; font-weight: bold">Filters</span><span style="color: #666666">.</span>mirror<span style="color: #666666">(</span>photoIn<span style="color: #666666">,</span> <span style="color: #007020; font-weight: bold">true</span><span style="color: #666666">,</span> <span style="color: #007020; font-weight: bold">true</span><span style="color: #666666">),</span> <span style="color: #4070a0">&quot;jpg&quot;</span><span style="color: #666666">,</span> <span style="color: #007020; font-weight: bold">new</span> <span style="color: #0e84b5; font-weight: bold">File</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;mirror.jpg&quot;</span><span style="color: #666666">))</span>
+  <span style="color: #0e84b5; font-weight: bold">ImageIO</span><span style="color: #666666">.</span>write<span style="color: #666666">(</span><span style="color: #0e84b5; font-weight: bold">Filters</span><span style="color: #666666">.</span>gray<span style="color: #666666">(</span>photoIn<span style="color: #666666">,</span> <span style="color: #4070a0">&quot;lightness&quot;</span><span style="color: #666666">),</span> <span style="color: #4070a0">&quot;jpg&quot;</span><span style="color: #666666">,</span> <span style="color: #007020; font-weight: bold">new</span> <span style="color: #0e84b5; font-weight: bold">File</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;gray.jpg&quot;</span><span style="color: #666666">))</span>
+  <span style="color: #0e84b5; font-weight: bold">ImageIO</span><span style="color: #666666">.</span>write<span style="color: #666666">(</span><span style="color: #0e84b5; font-weight: bold">Filters</span><span style="color: #666666">.</span>sepia<span style="color: #666666">(</span>photoIn<span style="color: #666666">,</span> <span style="color: #40a070">35</span><span style="color: #666666">),</span> <span style="color: #4070a0">&quot;jpg&quot;</span><span style="color: #666666">,</span> <span style="color: #007020; font-weight: bold">new</span> <span style="color: #0e84b5; font-weight: bold">File</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;sepia.jpg&quot;</span><span style="color: #666666">))</span>
+  <span style="color: #0e84b5; font-weight: bold">ImageIO</span><span style="color: #666666">.</span>write<span style="color: #666666">(</span><span style="color: #0e84b5; font-weight: bold">Filters</span><span style="color: #666666">.</span>inverse<span style="color: #666666">(</span>photoIn<span style="color: #666666">),</span> <span style="color: #4070a0">&quot;jpg&quot;</span><span style="color: #666666">,</span> <span style="color: #007020; font-weight: bold">new</span> <span style="color: #0e84b5; font-weight: bold">File</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;inverse.jpg&quot;</span><span style="color: #666666">))</span>
+  <span style="color: #0e84b5; font-weight: bold">ImageIO</span><span style="color: #666666">.</span>write<span style="color: #666666">(</span><span style="color: #0e84b5; font-weight: bold">Filters</span><span style="color: #666666">.</span>rgb_channels<span style="color: #666666">(</span>photoIn<span style="color: #666666">,</span> <span style="color: #007020; font-weight: bold">true</span><span style="color: #666666">,</span> <span style="color: #007020; font-weight: bold">false</span><span style="color: #666666">,</span> <span style="color: #007020; font-weight: bold">false</span><span style="color: #666666">),</span> <span style="color: #4070a0">&quot;jpg&quot;</span><span style="color: #666666">,</span> <span style="color: #007020; font-weight: bold">new</span> <span style="color: #0e84b5; font-weight: bold">File</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;rgb_channels.jpg&quot;</span><span style="color: #666666">))</span>
+  <span style="color: #0e84b5; font-weight: bold">ImageIO</span><span style="color: #666666">.</span>write<span style="color: #666666">(</span><span style="color: #0e84b5; font-weight: bold">Filters</span><span style="color: #666666">.</span>color_accent<span style="color: #666666">(</span>photoIn<span style="color: #666666">,</span> <span style="color: #40a070">0</span><span style="color: #666666">,</span> <span style="color: #40a070">50</span><span style="color: #666666">),</span> <span style="color: #4070a0">&quot;jpg&quot;</span><span style="color: #666666">,</span> <span style="color: #007020; font-weight: bold">new</span> <span style="color: #0e84b5; font-weight: bold">File</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;color_accent.jpg&quot;</span><span style="color: #666666">))</span>
+  <span style="color: #0e84b5; font-weight: bold">ImageIO</span><span style="color: #666666">.</span>write<span style="color: #666666">(</span><span style="color: #0e84b5; font-weight: bold">Filters</span><span style="color: #666666">.</span>histogram<span style="color: #666666">(</span>photoIn<span style="color: #666666">),</span> <span style="color: #4070a0">&quot;jpg&quot;</span><span style="color: #666666">,</span> <span style="color: #007020; font-weight: bold">new</span> <span style="color: #0e84b5; font-weight: bold">File</span><span style="color: #666666">(</span><span style="color: #4070a0">&quot;histogram.jpg&quot;</span><span style="color: #666666">))</span>
 
-}
-</code></pre>
+<span style="color: #666666">}</span>
+</pre></div>
 
 <p>This is the way how I run it:</p>
 

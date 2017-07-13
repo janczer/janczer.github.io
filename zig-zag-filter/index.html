@@ -19,10 +19,10 @@
     <title>
       
       
-         About me 
+         Sort zig-zag filter 
       
     </title>
-    <link rel="canonical" href="https://janczer.github.io/about/">
+    <link rel="canonical" href="https://janczer.github.io/zig-zag-filter/">
 
     <style>
   * {
@@ -410,14 +410,52 @@
 
 
 <section id=content>
-  <h1> About me </h1>
+  <h1> Sort zig-zag filter </h1>
 
   <div id=sub-header>
-    20 April 2017 · 1 minute read
+    13 July 2017 · 1 minute read
   </div>
 
   <div class="entry-content">
-    <p>Hello and welcome to my blog</p>
+    <p>Today I implemented some strange filter: <a href="https://github.com/janczer/filters#sort-zig-zag">Sort zig-zag filter</a>.</p>
+
+<p>This filter works on <del>gray scala</del> images:</p>
+
+<p><img src="/img/2.png" alt="one" /></p>
+
+<p>I was using these colors: <code>#1c</code>, <code>#38</code>, <code>#54</code>, <code>#70</code>, <code>#8c</code>, <code>#a8</code>, <code>#c4</code>, <code>#e0</code>, <code>#fc</code>.</p>
+
+<p>The filter is creating array of all pixels:</p>
+
+<p><img src="/img/3.png" alt="three" /></p>
+
+<p>And then it&rsquo;s sorting this array:</p>
+
+<p><img src="/img/4.png" alt="four" /></p>
+
+<p>On the last step filter is using <a href="https://en.wikipedia.org/wiki/Zigzag">zig-zag</a> scheme to create image:</p>
+
+<p><img src="/img/6.png" width="300"></p>
+
+<p>That was theory and now we will try it with the real image:</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">Original</th>
+<th align="center">Gray</th>
+<th align="center">Color</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center"><img src="/img/7.jpg" width="250"></td>
+<td align="center"><img src="/img/8.png" width="250"></td>
+<td align="center"><img src="/img/9.png" width="250"></td>
+</tr>
+</tbody>
+</table>
 
   </div>
 

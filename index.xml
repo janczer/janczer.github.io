@@ -6,10 +6,26 @@
     <description>Recent content on Blog =&gt; {content}</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 08 Jul 2017 17:24:27 +0200</lastBuildDate>
+    <lastBuildDate>Thu, 13 Jul 2017 18:58:34 +0200</lastBuildDate>
     
 	<atom:link href="https://janczer.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Sort zig-zag filter</title>
+      <link>https://janczer.github.io/zig-zag-filter/</link>
+      <pubDate>Thu, 13 Jul 2017 18:58:34 +0200</pubDate>
+      
+      <guid>https://janczer.github.io/zig-zag-filter/</guid>
+      <description>Today I implemented some strange filter: Sort zig-zag filter.
+This filter works on gray scala images:
+I was using these colors: #1c, #38, #54, #70, #8c, #a8, #c4, #e0, #fc.
+The filter is creating array of all pixels:
+And then it&amp;rsquo;s sorting this array:
+On the last step filter is using zig-zag scheme to create image:
+That was theory and now we will try it with the real image:
+   Original Gray Color           </description>
+    </item>
     
     <item>
       <title>Use scala jar</title>

@@ -6,10 +6,22 @@
     <description>Recent content on Blog =&gt; {content}</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 13 Jul 2017 18:58:34 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 21 Aug 2017 20:02:05 +0200</lastBuildDate>
     
 	<atom:link href="https://janczer.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Work with git objects from Python</title>
+      <link>https://janczer.github.io/work-with-git-objects/</link>
+      <pubDate>Mon, 21 Aug 2017 20:02:05 +0200</pubDate>
+      
+      <guid>https://janczer.github.io/work-with-git-objects/</guid>
+      <description>Git store data in files in .git/objects.
+Python has a zlib module. We want to read git files data with python:
+&amp;gt;&amp;gt;&amp;gt; import zlib &amp;gt;&amp;gt;&amp;gt; f = open(&amp;#39;.git/objects/9d/aeafb9864cf43055ae93beb0afd6c7d144bfa4&amp;#39;, &amp;#39;rb&amp;#39;) &amp;gt;&amp;gt;&amp;gt; data = f.read() &amp;gt;&amp;gt;&amp;gt; print(data) b&amp;#39;x\x01K\xca\xc9OR0e(I-.\xe1\x02\x00\x19\xa6\x03\xbf&amp;#39; &amp;gt;&amp;gt;&amp;gt; zlib.decompress(data) b&amp;#39;blob 5\x00test\n&amp;#39; &amp;gt;&amp;gt;&amp;gt;  This blob means that this is blob-type file (git uses 3 types of file: blob, commit and tree) and 5 is lenght of content test\n:
+Also we can check the hash:</description>
+    </item>
     
     <item>
       <title>Sort zig-zag filter</title>

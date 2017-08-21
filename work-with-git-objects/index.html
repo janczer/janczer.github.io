@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-	<meta name="generator" content="Hugo 0.26-DEV" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="HandheldFriendly" content="True">
@@ -20,10 +19,10 @@
     <title>
       
       
-         Blog =&gt; {content} 
+         Work with git objects from Python 
       
     </title>
-    <link rel="canonical" href="https://janczer.github.io/">
+    <link rel="canonical" href="https://janczer.github.io/work-with-git-objects/">
 
     <style>
   * {
@@ -395,8 +394,6 @@
 
 
     
-      <link href="https://janczer.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Blog =&gt; {content}" />
-    
   </head>
 
   <body>
@@ -413,49 +410,68 @@
 
 
 <section id=content>
-  <ul class=posts_listing>
+  <h1> Work with git objects from Python </h1>
+
+  <div id=sub-header>
+    21 August 2017 · 1 minute read
+  </div>
+
+  <div class="entry-content">
     
-      <li>
-        <h2><a href="https://janczer.github.io/work-with-git-objects/">Work with git objects from Python</a></h2>
-        <div id=date>
-          <time>21 August 2017</time>
-        </div>
-      </li>
+
+<p><a href="https://git-scm.com/">Git</a> store data in files in <code>.git/objects</code>.</p>
+
+<p>Python has a <code>zlib</code> module. We want to read git files data with python:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">zlib</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> f <span style="color: #666666">=</span> <span style="color: #007020">open</span>(<span style="color: #4070a0">&#39;.git/objects/9d/aeafb9864cf43055ae93beb0afd6c7d144bfa4&#39;</span>, <span style="color: #4070a0">&#39;rb&#39;</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> data <span style="color: #666666">=</span> f<span style="color: #666666">.</span>read()
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #007020; font-weight: bold">print</span>(data)
+<span style="color: #4070a0">b&#39;x</span><span style="color: #4070a0; font-weight: bold">\x01</span><span style="color: #4070a0">K</span><span style="color: #4070a0; font-weight: bold">\xca\xc9</span><span style="color: #4070a0">OR0e(I-.</span><span style="color: #4070a0; font-weight: bold">\xe1\x02\x00\x19\xa6\x03\xbf</span><span style="color: #4070a0">&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> zlib<span style="color: #666666">.</span>decompress(data)
+<span style="color: #4070a0">b&#39;blob 5</span><span style="color: #4070a0; font-weight: bold">\x00</span><span style="color: #4070a0">test</span><span style="color: #4070a0; font-weight: bold">\n</span><span style="color: #4070a0">&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span>
+</pre></div>
+
+<p>This <code>blob</code> means that this is blob-type file (git uses 3 types of file: <code>blob</code>, <code>commit</code> and <code>tree</code>) and <code>5</code> is lenght of content <code>test\n</code>:</p>
+
+<p>Also we can check the hash:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">hashlib</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> hashlib<span style="color: #666666">.</span>sha1(zlib<span style="color: #666666">.</span>decompress(data))<span style="color: #666666">.</span>hexdigest()
+<span style="color: #4070a0">&#39;9daeafb9864cf43055ae93beb0afd6c7d144bfa4&#39;</span>
+<span style="color: #666666">&gt;&gt;&gt;</span>
+</pre></div>
+
+<p>Now we can see that hash is exactly the same like we used before.</p>
+
+<h3 id="create-your-own-object-file">Create your own object file</h3>
+
+<p><a href="https://git-scm.com/book/en/v2/Git-Internals-Git-Objects#_object_storage">Pro Git book</a> shows how to create object file in Ruby. But to create object file in python we need the same modules that we use for reading files plus <code>os</code> module to create directory:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">zlib</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">hashlib</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #007020; font-weight: bold">import</span> <span style="color: #0e84b5; font-weight: bold">os</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> s <span style="color: #666666">=</span> <span style="color: #4070a0">&#39;blob 11</span><span style="color: #4070a0; font-weight: bold">\x00</span><span style="color: #4070a0">new string</span><span style="color: #4070a0; font-weight: bold">\x00</span><span style="color: #4070a0">&#39;</span><span style="color: #666666">.</span>encode()
+</pre></div>
+
+<p>Get the hash:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #666666">&gt;&gt;&gt;</span> <span style="color: #007020">hash</span> <span style="color: #666666">=</span> hashlib<span style="color: #666666">.</span>sha1(s)<span style="color: #666666">.</span>hexdigest() <span style="color: #60a0b0; font-style: italic"># 90cc64bc4738805499e19ab3bab69ecb2c3a16c0</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> os<span style="color: #666666">.</span>mkdir(<span style="color: #4070a0">&#39;.git/objects/&#39;</span> <span style="color: #666666">+</span> <span style="color: #007020">hash</span>[<span style="color: #40a070">0</span>:<span style="color: #40a070">2</span>]) <span style="color: #60a0b0; font-style: italic"># .git/objects/90 do it if necessary</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> f <span style="color: #666666">=</span> <span style="color: #007020">open</span>(<span style="color: #4070a0">&#39;.git/objects/&#39;</span> <span style="color: #666666">+</span> <span style="color: #007020">hash</span>[<span style="color: #40a070">0</span>:<span style="color: #40a070">2</span>] <span style="color: #666666">+</span> <span style="color: #4070a0">&#39;/&#39;</span> <span style="color: #666666">+</span> <span style="color: #007020">hash</span>[<span style="color: #40a070">2</span>:], <span style="color: #4070a0">&#39;wb&#39;</span>)
+<span style="color: #666666">&gt;&gt;&gt;</span> f<span style="color: #666666">.</span>write(zlib<span style="color: #666666">.</span>compress(s))
+<span style="color: #40a070">27</span>
+<span style="color: #666666">&gt;&gt;&gt;</span> f<span style="color: #666666">.</span>close()
+</pre></div>
+
+<p>Now we have new well-formed git object in <code>.git/objects/90</code>.</p>
+
+  </div>
+
+  <div id=links>
     
-      <li>
-        <h2><a href="https://janczer.github.io/zig-zag-filter/">Sort zig-zag filter</a></h2>
-        <div id=date>
-          <time>13 July 2017</time>
-        </div>
-      </li>
     
-      <li>
-        <h2><a href="https://janczer.github.io/use-scala-jar/">Use scala jar</a></h2>
-        <div id=date>
-          <time>8 July 2017</time>
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://janczer.github.io/first-scala/">First Scala</a></h2>
-        <div id=date>
-          <time>1 July 2017</time>
-        </div>
-      </li>
-    
-      <li>
-        <h2><a href="https://janczer.github.io/about/">About me</a></h2>
-        <div id=date>
-          <time>20 April 2017</time>
-        </div>
-      </li>
-    
-  </ul>
+  </div>
 </section>
 
     <div class="icons">
-        
-            <a href="https://janczer.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Blog =&gt; {content}"><img class="icon" src="rss.svg" alt="rss"/></a>
         
         
             <a href="//github.com/janczer" target="_blank"><img class="icon" src="github.png" alt="github"/></a>
@@ -464,5 +480,6 @@
   
 </body>
 </html>
+
 
 

@@ -55,7 +55,8 @@ for (x &amp;lt;- 0 until w) for (y &amp;lt;- 0 until h) { val wOut = if (ox) w -
       <pubDate>Thu, 20 Apr 2017 21:18:39 +0200</pubDate>
       
       <guid>https://janczer.github.io/about/</guid>
-      <description>Hello and welcome to my blog</description>
+      <description>Hello and welcome to my blog about programing.
+Also I have a hobby - pixel art:</description>
     </item>
     
   </channel>

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://janczer.github.io/create-simple-debugfs-object/</loc>
+    <lastmod>2017-10-02T20:46:25+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://janczer.github.io/work-with-dev-input/</loc>
     <lastmod>2017-09-09T12:21:20+02:00</lastmod>
   </url>
@@ -34,12 +39,19 @@
   
   <url>
     <loc>https://janczer.github.io/</loc>
-    <lastmod>2017-09-09T12:21:20+02:00</lastmod>
+    <lastmod>2017-10-02T20:46:25+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://janczer.github.io/categories/c/</loc>
+    <lastmod>2017-10-02T20:46:25+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://janczer.github.io/categories/</loc>
+    <lastmod>2017-10-02T20:46:25+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -51,7 +63,7 @@
   
   <url>
     <loc>https://janczer.github.io/categories/linux/</loc>
-    <lastmod>2017-09-09T12:21:20+02:00</lastmod>
+    <lastmod>2017-10-02T20:46:25+02:00</lastmod>
     <priority>0</priority>
   </url>
   

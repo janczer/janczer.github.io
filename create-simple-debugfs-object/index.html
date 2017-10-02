@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <base href="https://janczer.github.io/">
+    
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400|Old+Standard+TT:400' rel='stylesheet' type='text/css'>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-105337140-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+    <link rel="icon" type="image/png" href="/favicon_16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/favicon_32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon_128x128.png" sizes="128x128">
+
+    <title>
+      
+      
+         Create Simple Debugfs Object 
+      
+    </title>
+    <link rel="canonical" href="https://janczer.github.io/create-simple-debugfs-object/">
+
+    <style>
+  * {
+    border:0;
+    font:inherit;
+    font-size:100%;
+    vertical-align:baseline;
+    margin:0;
+    padding:0;
+    color: black;
+  }
+
+  a .icon {
+    width: 16px;
+    height: 16px; 
+  }
+
+  body {
+    font-family:'Open Sans', 'Myriad Pro', Myriad, sans-serif;
+    font-size:17px;
+    line-height:160%;
+    color:#1d1313;
+    max-width:700px;
+    margin:auto;
+  }
+
+  p {
+    margin: 20px 0;
+  }
+
+  a img {
+    border:none;
+  }
+
+  img {
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    display: block;
+  }
+
+  pre, code {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #f7f7f7;
+  }
+
+  code {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+    word-wrap: normal;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+  }
+
+  pre>code {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    background: transparent;
+    border: 0;
+  }
+
+  pre code {
+    display: inline;
+    max-width: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+  }
+
+  pre code::before,
+  pre code::after {
+    content: normal;
+  }
+
+  em,q,em,dfn {
+    font-style:italic;
+  }
+
+  .sans,html .gist .gist-file .gist-meta {
+    font-family:"Open Sans","Myriad Pro",Myriad,sans-serif;
+  }
+
+  .mono,pre,code,tt,p code,li code {
+    font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+  }
+
+  .heading,.serif,h1,h2,h3 {
+    font-family:"Old Standard TT",serif;
+  }
+
+  strong {
+    font-weight:600;
+  }
+
+  q:before {
+    content:"\201C";
+  }
+
+  q:after {
+    content:"\201D";
+  }
+
+  del,s {
+    text-decoration:line-through;
+  }
+
+  blockquote {
+    font-family:"Old Standard TT",serif;
+    text-align:center;
+    padding:50px;
+  }
+
+  blockquote p {
+    display:inline-block;
+    font-style:italic;
+  }
+
+  blockquote:before,blockquote:after {
+    font-family:"Old Standard TT",serif;
+    content:'\201C';
+    font-size:35px;
+    color:#403c3b;
+  }
+
+  blockquote:after {
+    content:'\201D';
+  }
+
+  hr {
+    width:40%;
+    height: 1px;
+    background:#403c3b;
+    margin: 25px auto;
+  }
+
+  h1 {
+    font-size:35px;
+  }
+
+  h2 {
+    font-size:28px;
+  }
+
+  h3 {
+    font-size:22px;
+    margin-top:18px;
+  }
+
+  h1 a,h2 a,h3 a {
+    text-decoration:none;
+  }
+
+  h1,h2 {
+    margin-top:28px;
+  }
+
+  #sub-header, time {
+    color:#403c3b;
+    font-size:13px;
+  }
+
+  #sub-header {
+    margin: 0 4px;
+  }
+
+  #nav h1 a {
+    font-size:35px;
+    color:#1d1313;
+    line-height:120%;
+  }
+
+  .posts_listing a,#nav a {
+    text-decoration: none;
+  }
+
+  li {
+    margin-left: 20px;
+  }
+
+  ul li {
+    margin-left: 5px;
+  }
+
+  ul li {
+    list-style-type: none;
+  }
+  ul li:before {
+    content:"\00BB \0020";
+  }
+
+  #nav ul li:before, .posts_listing li:before {
+    content:'';
+    margin-right:0;
+  }
+
+  #content {
+    text-align:left;
+    width:100%;
+    font-size:15px;
+    padding:60px 0 80px;
+  }
+
+  #content h1,#content h2 {
+    margin-bottom:5px;
+  }
+
+  #content h2 {
+    font-size:25px;
+  }
+
+  #content .entry-content {
+    margin-top:15px;
+  }
+
+  #content time {
+    margin-left:3px;
+  }
+
+  #content h1 {
+    font-size:30px;
+  }
+
+  .highlight {
+    margin: 10px 0;
+  }
+
+  .posts_listing {
+    margin:0 0 50px;
+  }
+
+  .posts_listing li {
+    margin:0 0 25px 15px;
+  }
+
+  .posts_listing li a:hover,#nav a:hover {
+    text-decoration: underline;
+  }
+
+  #nav {
+    text-align:center;
+    position:static;
+    margin-top:60px;
+  }
+
+  #nav ul {
+    display: table;
+    margin: 8px auto 0 auto;
+  }
+
+  #nav li {
+    list-style-type:none;
+    display:table-cell;
+    font-size:15px;
+    padding: 0 20px;
+  }
+
+  #links {
+    margin: 50px 0 0 0;
+  }
+
+  #links :nth-child(2) {
+    float:right;
+  }
+
+  #not-found {
+    text-align: center;
+  }
+
+  #not-found a {
+    font-family:"Old Standard TT",serif;
+    font-size: 200px;
+    text-decoration: none;
+    display: inline-block;
+    padding-top: 225px;
+  }
+
+  .icons a:first-child {
+    margin-left: 25px;
+  }
+
+  .icons a {
+      display: inline-block;
+      margin-left: 6px;
+      margin-right: 6px;
+      opacity: 0.6;
+  }
+
+  @media (max-width: 750px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:28px;
+    }
+
+    #nav li {
+      font-size:13px;
+      padding: 0 15px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:50px;
+      font-size:14px;
+    }
+
+    #content h1 {
+      font-size:25px;
+    }
+
+    #content h2 {
+      font-size:22px;
+    }
+
+    .posts_listing li div {
+      font-size:12px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body {
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    #nav h1 a {
+      font-size:22px;
+    }
+
+    #nav li {
+      font-size:12px;
+      padding: 0 10px;
+    }
+
+    #content {
+      margin-top:0;
+      padding-top:20px;
+      font-size:12px;
+    }
+
+    #content h1 {
+      font-size:20px;
+    }
+
+    #content h2 {
+      font-size:18px;
+    }
+
+    .posts_listing li div{
+      font-size:12px;
+    }
+  }
+</style>
+
+
+    
+  </head>
+
+  <body>
+    <section id=nav>
+      <h1><a href="/"></a></h1>
+      <ul>
+        
+          <li><a href="/">Blog</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+      </ul>
+    </section>
+
+
+<section id=content>
+  <h1> Create Simple Debugfs Object </h1>
+
+  <div id=sub-header>
+    2 October 2017 · 2 minute read
+  </div>
+
+  <div class="entry-content">
+    
+
+<p>In this article we will create simple debugfs object in <code>/sys/kernel/debug/</code>.
+Our debugfs object will be able to save some string and return it.</p>
+
+<p>In the first step module creates directory in <code>/sys/kernel/debug/</code> with name <code>debugfs_test</code>:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>subdir <span style="color: #666666">=</span> debugfs_create_dir(<span style="color: #4070a0">&quot;debugfs_test&quot;</span>, <span style="color: #007020">NULL</span>);
+</pre></div>
+
+<p>And adds in this directory file <code>data_file</code>:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span>data_file <span style="color: #666666">=</span> debugfs_create_file(<span style="color: #4070a0">&quot;data_file&quot;</span>, <span style="color: #40a070">0644</span>, subdir, <span style="color: #007020">NULL</span>, <span style="color: #666666">&amp;</span>data_file_fops);
+</pre></div>
+
+<p>Module handles reading and writing events with this functions:</p>
+
+<pre><code>static ssize_t data_read(struct file *, char *, size_t, loff_t *);
+static ssize_t data_write(struct file *, const char *, size_t, loff_t *);
+</code></pre>
+
+<p>I also used functions <code>simple_read_from_buffer</code> and <code>simple_write_to_buffer</code> to work with buffers.</p>
+
+<p>You can find source code of this module at the end of this article or in <a href="https://github.com/janczer/simple_debugfs">repository</a></p>
+
+<h3 id="testing">Testing</h3>
+
+<p>After compiling and installing this module we will get new directory <code>debugfs_test</code> in <code>/sys/kernel/debug/</code>:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic"># pwd</span>
+/sys/kernel/debug/debugfs_test
+<span style="color: #60a0b0; font-style: italic"># ls -lha</span>
+total <span style="color: #40a070">0</span>
+drwxr-xr-x  <span style="color: #40a070">2</span> root root <span style="color: #40a070">0</span> oct  <span style="color: #40a070">2</span> <span style="color: #40a070">18</span>:09 .
+drwx------ <span style="color: #40a070">32</span> root root <span style="color: #40a070">0</span> oct  <span style="color: #40a070">2</span> <span style="color: #40a070">18</span>:09 ..
+-rw-r--r--  <span style="color: #40a070">1</span> root root <span style="color: #40a070">0</span> oct  <span style="color: #40a070">2</span> <span style="color: #40a070">18</span>:09 data_file
+</pre></div>
+
+<p>We can use function <code>cat</code> and <code>tee</code> for testing:</p>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic"># echo &quot;simple data&quot; | tee data_file</span>
+simple data
+<span style="color: #60a0b0; font-style: italic"># cat data_file</span>
+simple data
+<span style="color: #60a0b0; font-style: italic"># echo &quot;next data, simple echo&quot; | tee data_file</span>
+next data, simple <span style="color: #007020">echo</span>
+<span style="color: #60a0b0; font-style: italic"># cat data_file</span>
+next data, simple <span style="color: #007020">echo</span>
+</pre></div>
+
+<p>You can see that this module works like we expected.</p>
+
+<h3 id="source-code">Source code</h3>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><span style="color: #60a0b0; font-style: italic">/**</span>
+<span style="color: #60a0b0; font-style: italic"> * @file debugfs.c</span>
+<span style="color: #60a0b0; font-style: italic"> * @author janczer</span>
+<span style="color: #60a0b0; font-style: italic"> * @version 0.1</span>
+<span style="color: #60a0b0; font-style: italic"> */</span>
+
+<span style="color: #007020">#include</span> <span style="color: #60a0b0; font-style: italic">&lt;linux/string.h&gt;</span><span style="color: #007020"></span>
+<span style="color: #007020">#include</span> <span style="color: #60a0b0; font-style: italic">&lt;linux/init.h&gt;</span><span style="color: #007020"></span>
+<span style="color: #007020">#include</span> <span style="color: #60a0b0; font-style: italic">&lt;linux/module.h&gt;</span><span style="color: #007020"></span>
+<span style="color: #007020">#include</span> <span style="color: #60a0b0; font-style: italic">&lt;linux/miscdevice.h&gt;</span><span style="color: #007020"></span>
+<span style="color: #007020">#include</span> <span style="color: #60a0b0; font-style: italic">&lt;linux/kernel.h&gt;</span><span style="color: #007020"></span>
+<span style="color: #007020">#include</span> <span style="color: #60a0b0; font-style: italic">&lt;linux/fs.h&gt;</span><span style="color: #007020"></span>
+<span style="color: #007020">#include</span> <span style="color: #60a0b0; font-style: italic">&lt;linux/uaccess.h&gt;</span><span style="color: #007020"></span>
+<span style="color: #007020">#include</span> <span style="color: #60a0b0; font-style: italic">&lt;linux/debugfs.h&gt;</span><span style="color: #007020"></span>
+
+MODULE_LICENSE(<span style="color: #4070a0">&quot;GPL&quot;</span>);
+MODULE_AUTHOR(<span style="color: #4070a0">&quot;janczer&quot;</span>);
+MODULE_DESCRIPTION(<span style="color: #4070a0">&quot;Simple debugfs object&quot;</span>);
+MODULE_VERSION(<span style="color: #4070a0">&quot;0.1&quot;</span>);
+
+<span style="color: #902000">char</span> data[PAGE_SIZE]; <span style="color: #60a0b0; font-style: italic">// variable to store data</span>
+<span style="color: #902000">int</span> data_len <span style="color: #666666">=</span> <span style="color: #40a070">0</span>;
+
+<span style="color: #007020; font-weight: bold">static</span> <span style="color: #007020; font-weight: bold">struct</span> dentry <span style="color: #666666">*</span>data_file;
+<span style="color: #007020; font-weight: bold">static</span> <span style="color: #007020; font-weight: bold">struct</span> dentry <span style="color: #666666">*</span>subdir;
+
+<span style="color: #60a0b0; font-style: italic">// function for handle read and write events</span>
+<span style="color: #007020; font-weight: bold">static</span> <span style="color: #902000">ssize_t</span> <span style="color: #06287e">data_read</span>(<span style="color: #007020; font-weight: bold">struct</span> file <span style="color: #666666">*</span>, <span style="color: #902000">char</span> <span style="color: #666666">*</span>, <span style="color: #902000">size_t</span>, loff_t <span style="color: #666666">*</span>);
+<span style="color: #007020; font-weight: bold">static</span> <span style="color: #902000">ssize_t</span> <span style="color: #06287e">data_write</span>(<span style="color: #007020; font-weight: bold">struct</span> file <span style="color: #666666">*</span>, <span style="color: #007020; font-weight: bold">const</span> <span style="color: #902000">char</span> <span style="color: #666666">*</span>, <span style="color: #902000">size_t</span>, loff_t <span style="color: #666666">*</span>);
+
+<span style="color: #007020; font-weight: bold">const</span> <span style="color: #007020; font-weight: bold">struct</span> file_operations data_file_fops <span style="color: #666666">=</span> {
+	.owner <span style="color: #666666">=</span> THIS_MODULE,
+	.write <span style="color: #666666">=</span> data_write,
+	.read <span style="color: #666666">=</span> data_read,
+};
+
+<span style="color: #007020; font-weight: bold">static</span> <span style="color: #902000">int</span> __init <span style="color: #06287e">debugfs_init</span>(<span style="color: #902000">void</span>)
+{
+	subdir <span style="color: #666666">=</span> debugfs_create_dir(<span style="color: #4070a0">&quot;debugfs_test&quot;</span>, <span style="color: #007020">NULL</span>);
+	<span style="color: #007020; font-weight: bold">if</span> (<span style="color: #666666">!</span>subdir)
+		<span style="color: #007020; font-weight: bold">return</span> <span style="color: #666666">-</span>ENOENT;
+
+	data_file <span style="color: #666666">=</span> debugfs_create_file(<span style="color: #4070a0">&quot;data_file&quot;</span>, <span style="color: #40a070">0644</span>, subdir, <span style="color: #007020">NULL</span>,
+			<span style="color: #666666">&amp;</span>data_file_fops);
+	<span style="color: #007020; font-weight: bold">if</span> (<span style="color: #666666">!</span>data_file)
+		<span style="color: #007020; font-weight: bold">goto</span> exit;
+
+	<span style="color: #007020; font-weight: bold">return</span> <span style="color: #40a070">0</span>;
+<span style="color: #002070; font-weight: bold">exit</span>:
+	debugfs_remove_recursive(subdir);
+	<span style="color: #007020; font-weight: bold">return</span> <span style="color: #666666">-</span>ENOENT;
+}
+
+<span style="color: #007020; font-weight: bold">static</span> <span style="color: #902000">void</span> __exit <span style="color: #06287e">debugfs_exit</span>(<span style="color: #902000">void</span>)
+{
+	debugfs_remove_recursive(subdir);
+}
+
+<span style="color: #007020; font-weight: bold">static</span> <span style="color: #902000">ssize_t</span> <span style="color: #06287e">data_read</span>(<span style="color: #007020; font-weight: bold">struct</span> file <span style="color: #666666">*</span>f, <span style="color: #902000">char</span> <span style="color: #666666">*</span>buffer,
+		<span style="color: #902000">size_t</span> len, loff_t <span style="color: #666666">*</span>offset)
+{
+	<span style="color: #007020; font-weight: bold">return</span> simple_read_from_buffer(buffer, len, offset, data, data_len);
+}
+
+<span style="color: #007020; font-weight: bold">static</span> <span style="color: #902000">ssize_t</span> <span style="color: #06287e">data_write</span>(<span style="color: #007020; font-weight: bold">struct</span> file <span style="color: #666666">*</span>f, <span style="color: #007020; font-weight: bold">const</span> <span style="color: #902000">char</span> <span style="color: #666666">*</span>buffer,
+		<span style="color: #902000">size_t</span> len, loff_t <span style="color: #666666">*</span>offset)
+{
+	<span style="color: #902000">ssize_t</span> ret;
+
+	ret <span style="color: #666666">=</span> simple_write_to_buffer(data, PAGE_SIZE, offset, buffer, len);
+
+	<span style="color: #007020; font-weight: bold">if</span> (ret <span style="color: #666666">&lt;</span> <span style="color: #40a070">0</span>)
+		<span style="color: #007020; font-weight: bold">return</span> ret;
+
+	data_len <span style="color: #666666">=</span> ret;
+
+	<span style="color: #007020; font-weight: bold">return</span> len;
+}
+
+module_init(debugfs_init);
+module_exit(debugfs_exit);
+</pre></div>
+
+  </div>
+
+  <div id=links>
+    
+    
+  </div>
+</section>
+
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "janczer" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <div class="icons">
+        
+        
+            <a href="//github.com/janczer" target="_blank"><img class="icon" src="github.png" alt="github"/></a>
+        
+    </div>
+  
+</body>
+</html>
+
+
+

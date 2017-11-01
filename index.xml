@@ -6,22 +6,20 @@
     <description>Recent content on Blog =&gt; {content}</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 Oct 2017 20:46:25 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 01 Nov 2017 09:01:51 +0200</lastBuildDate>
     
 	<atom:link href="https://janczer.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Create Simple Debugfs Object</title>
-      <link>https://janczer.github.io/create-simple-debugfs-object/</link>
-      <pubDate>Mon, 02 Oct 2017 20:46:25 +0200</pubDate>
+      <title>Start With Symfony And Docker</title>
+      <link>https://janczer.github.io/start-with-symfony-and-docker/</link>
+      <pubDate>Wed, 01 Nov 2017 09:01:51 +0200</pubDate>
       
-      <guid>https://janczer.github.io/create-simple-debugfs-object/</guid>
-      <description>In this article we will create simple debugfs object in /sys/kernel/debug/. Our debugfs object will be able to save some string and return it.
-In the first step module creates directory in /sys/kernel/debug/ with name debugfs_test:
-subdir = debugfs_create_dir(&amp;quot;debugfs_test&amp;quot;, NULL);  And adds in this directory file data_file:
-data_file = debugfs_create_file(&amp;quot;data_file&amp;quot;, 0644, subdir, NULL, &amp;amp;data_file_fops);  Module handles reading and writing events with this functions:
-static ssize_t data_read(struct file *, char *, size_t, loff_t *); static ssize_t data_write(struct file *, const char *, size_t, loff_t *);  I also used functions simple_read_from_buffer and simple_write_to_buffer to work with buffers.</description>
+      <guid>https://janczer.github.io/start-with-symfony-and-docker/</guid>
+      <description>Docker can help you start with new technology or language without installing all programs on your computer just to try it. You can pull docker images, run it and if you don&amp;rsquo;t like it just remove images.
+For examaple for starting learning Symfony and creating your first page there is no need to install nginx/apache, php. You just need to install docker and docker-compose.
+Create template for first page in Symfony After you get Symfony installer we can create simple template for our app:</description>
     </item>
     
     <item>
